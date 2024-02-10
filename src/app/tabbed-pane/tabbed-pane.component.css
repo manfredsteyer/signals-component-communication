@@ -1,0 +1,10 @@
+.pane .nav a {
+    border-bottom: 5px solid goldenrod;
+    margin-right: 5px;
+    padding:5px;
+    cursor: pointer;
+}
+
+.pane .nav {
+    padding-bottom: 20px;
+}
