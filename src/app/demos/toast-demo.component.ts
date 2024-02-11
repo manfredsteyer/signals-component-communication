@@ -1,22 +1,27 @@
 import { Component, ViewContainerRef, viewChild } from '@angular/core';
-import { InfoComponent } from '../info/info.component';
+import { ToastComponent } from './toast.component';
 
 @Component({
   selector: 'app-dynamic',
   standalone: true,
   imports: [],
   template: `
-    <h2>Dynamic Example</h2>
-    <input type="button" value="Add" (click)="add()">
+    <h2>Toast Demo</h2>
+    <button (click)="show()">Show Toast</button>
     <ng-container #placeholder></ng-container>
-`,
+  `,
+  styles: `
+    button: {
+      width: auto;
+    }
+  `
 })
-export class DynamicComponent {
+export class ToastDemoComponent {
   counter = 0;
   placeholder = viewChild('placeholder', { read: ViewContainerRef });
 
-  add() {
-    const ref = this.placeholder()?.createComponent(InfoComponent);
+  show() {
+    const ref = this.placeholder()?.createComponent(ToastComponent);
     this.counter++;
     ref?.setInput('label', 'Option #' + this.counter);
     setTimeout(() => ref?.destroy(), 2000);

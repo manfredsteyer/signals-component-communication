@@ -18,6 +18,8 @@ function boolTranformer(value: unknown): boolean {
       border: 2px solid black;
       width: 200px;
       padding: 10px;
+      margin: 20px 20px 0px 0px;
+      display: inline-block;
     }
   `
 })

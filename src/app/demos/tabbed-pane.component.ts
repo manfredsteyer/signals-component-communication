@@ -1,5 +1,5 @@
 import { Component, computed, contentChildren, model } from '@angular/core';
-import { TabComponent } from '../tab/tab.component';
+import { TabComponent } from './tab.component';
 
 @Component({
   selector: 'app-tabbed-pane',
@@ -7,24 +7,26 @@ import { TabComponent } from '../tab/tab.component';
   imports: [],
   template: `
     <div class="pane">
-      <div class="nav">
+      <div class="nav" role="group">
           @for(tab of tabs(); track tab) {
-              <a (click)="current.set($index)">{{tab.title()}}</a>
+              <button [class.secondary]="tab !== currentTab()" (click)="current.set($index)">{{tab.title()}}</button>
           }
       </div>
-      <ng-content ></ng-content>
+      <article>
+        <ng-content ></ng-content>
+      </article>
     </div>
   `,
   styles: `
-    .pane .nav a {
-      border-bottom: 5px solid goldenrod;
-      margin-right: 5px;
-      padding:5px;
+    .pane .nav button {
       cursor: pointer;
+      text-decoration: none;
+      padding: 10px 20px;
     }
 
     .pane .nav {
-      padding-bottom: 20px;
+      margin-bottom: 10px;
+      width:auto;
     }
   `
 })

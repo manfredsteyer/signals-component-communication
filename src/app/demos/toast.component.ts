@@ -25,9 +25,8 @@ import { Component, input, model } from '@angular/core';
     left: 50%; 
     bottom: 30px; 
   }
-
 `
 })
-export class InfoComponent {
+export class ToastComponent {
   label = input.required<string>();
 }

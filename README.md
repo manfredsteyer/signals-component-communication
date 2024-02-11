@@ -1,3 +1,3 @@
-# TabbedPane Demo with Signals
+# Signal Demo: Component Communication
 
-Simple TabbedPane using Signals
+Examples for ``input()``, ``model()``, ``viewChild()``, ``contentChildren()``

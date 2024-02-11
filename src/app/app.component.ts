@@ -1,16 +1,35 @@
 import { Component } from '@angular/core';
-import { TabComponent } from "./tab/tab.component";
-import { FormComponent } from "./form/form.component";
-import { DynamicComponent } from "./dynamic/dynamic.component";
-import { OptionDemoComponent } from "./option-demo/option-demo.component";
-import { TabbedPaneDemoComponent } from './tabbed-pane-demo/tabbed-pane-demo.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [TabbedPaneDemoComponent, TabComponent, FormComponent, DynamicComponent, OptionDemoComponent]
+  template: `
+    <div class="container">
+      <header>
+          <nav>
+              <ul>
+                  <li><strong>Signals Demo: Component Communication</strong></li>
+              </ul>
+              <ul>
+                  <li><a routerLink="tabbed-pane-demo">Tabs</a></li>
+                  <li><a routerLink="option-demo">Option</a></li>
+                  <li><a routerLink="form-demo">Form</a></li>
+                  <li><a routerLink="toast-demo">Toast</a></li>
+                </ul>
+          </nav>
+      </header>
+      <main>
+          <router-outlet></router-outlet>
+      </main>
+    </div>
+  `,
+  styles: `
+    main {
+      margin-top:20px;
+    }
+  `,
+  imports: [RouterModule]
 })
 export class AppComponent {
 }
