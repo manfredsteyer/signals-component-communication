@@ -11,7 +11,7 @@ import { ToastComponent } from './toast.component';
     <ng-container #placeholder></ng-container>
   `,
   styles: `
-    button: {
+    button {
       width: auto;
     }
   `
@@ -23,7 +23,7 @@ export class ToastDemoComponent {
   show() {
     const ref = this.placeholder()?.createComponent(ToastComponent);
     this.counter++;
-    ref?.setInput('label', 'Option #' + this.counter);
+    ref?.setInput('label', 'Message #' + this.counter);
     setTimeout(() => ref?.destroy(), 2000);
   }
 
