@@ -1,13 +1,21 @@
-import { Component, signal, input } from '@angular/core';
+import { Component, signal, input, inject, computed } from '@angular/core';
+import { TabbedPaneComponent } from '../tabbed-pane/tabbed-pane.component';
 
 @Component({
   selector: 'app-tab',
   standalone: true,
   imports: [],
-  templateUrl: './tab.component.html',
-  styleUrl: './tab.component.css'
+  template: `
+    @if(visible()) {
+    <div class="tab">
+      <h2>{{ title() }}</h2>
+      <ng-content></ng-content>
+    </div>
+  }
+  `,
 })
 export class TabComponent {
-  visible = signal(true);
-  title = input();
+  pane = inject(TabbedPaneComponent);
+  title = input.required<string>();
+  visible = computed(() => this.pane.currentTab() === this)
 }

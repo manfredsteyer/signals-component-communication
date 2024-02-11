@@ -1,8 +1,0 @@
-<div class="pane">
-    <div class="nav">
-        @for(tab of tabs(); track tab) {
-            <a (click)="current.set($index)">{{tab.title()}}</a>
-        }
-    </div>
-    <ng-content ></ng-content>
-</div>
