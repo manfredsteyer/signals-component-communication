@@ -1,4 +1,4 @@
-import { Component, computed, contentChildren, model } from '@angular/core';
+import { Component, EventEmitter, Output, computed, contentChildren, input, model, output } from '@angular/core';
 import { TabComponent } from './tab.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { TabComponent } from './tab.component';
     <div class="pane">
       <div class="nav" role="group">
           @for(tab of tabs(); track tab) {
-              <button [class.secondary]="tab !== currentTab()" (click)="current.set($index)">{{tab.title()}}</button>
+              <button [class.secondary]="tab !== currentTab()" (click)="currentChange.emit($index)">{{tab.title()}}</button>
           }
       </div>
       <article>
@@ -31,7 +31,9 @@ import { TabComponent } from './tab.component';
   `
 })
 export class TabbedPaneComponent {
-  current = model(0);
+  current = input(0);
+  currentChange = output<number>();
+
   tabs = contentChildren(TabComponent);
   currentTab = computed(() => this.tabs()[this.current()]);
 }

@@ -1,4 +1,4 @@
-import { Component, booleanAttribute, input } from '@angular/core';
+import { Component, booleanAttribute, effect, input } from '@angular/core';
 
 function boolTranformer(value: unknown): boolean {
   return value !== 'no';
