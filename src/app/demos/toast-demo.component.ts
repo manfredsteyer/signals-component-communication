@@ -18,7 +18,7 @@ import { ToastComponent } from './toast.component';
 })
 export class ToastDemoComponent {
   counter = 0;
-  placeholder = viewChild('placeholder', { read: ViewContainerRef });
+  placeholder = viewChild.required('placeholder', { read: ViewContainerRef });
 
   show() {
     const ref = this.placeholder()?.createComponent(ToastComponent);

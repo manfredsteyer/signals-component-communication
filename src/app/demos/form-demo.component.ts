@@ -22,8 +22,8 @@ import { JsonPipe } from '@angular/common';
 })
 export class FormDemoComponent {
   form = viewChild.required(NgForm);
-  userNameCtrl = viewChild.required('userNameCtrl', { read: ElementRef });
-  passwordCtrl = viewChild.required('passwordCtrl', { read: ElementRef });
+  userNameCtrl = viewChild.required<ElementRef<HTMLInputElement>>('userNameCtrl');
+  passwordCtrl = viewChild.required<ElementRef<HTMLInputElement>>('passwordCtrl');
 
   userName = signal('');
   password = signal('');
