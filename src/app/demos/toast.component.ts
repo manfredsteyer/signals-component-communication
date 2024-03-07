@@ -1,4 +1,4 @@
-import { Component, input, model } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 
 @Component({
   selector: 'app-info',
@@ -6,7 +6,7 @@ import { Component, input, model } from '@angular/core';
   imports: [],
   template: `
     <div class="toast">
-        {{ label() }}
+        {{ label() }} <a (click)="confirm()">Ok</a>
     </div>  
 `,
   styles: `
@@ -25,8 +25,20 @@ import { Component, input, model } from '@angular/core';
     left: 50%; 
     bottom: 30px; 
   }
+
+  .toast a {
+    margin-left: 10px;
+    cursor: pointer;
+    color: lightsteelblue;
+    text-decoration: none;
+  }
 `
 })
 export class ToastComponent {
   label = input.required<string>();
+  confirmed = output<string>();
+
+  confirm(): void {
+    this.confirmed.emit(this.label());
+  }
 }

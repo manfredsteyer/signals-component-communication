@@ -1,5 +1,8 @@
 import { Component, ViewContainerRef, viewChild } from '@angular/core';
+import { outputToObservable } from '@angular/core/rxjs-interop';
+
 import { ToastComponent } from './toast.component';
+import { map, race, timer } from 'rxjs';
 
 @Component({
   selector: 'app-dynamic',
@@ -23,8 +26,20 @@ export class ToastDemoComponent {
   show() {
     const ref = this.placeholder()?.createComponent(ToastComponent);
     this.counter++;
-    ref?.setInput('label', 'Message #' + this.counter);
-    setTimeout(() => ref?.destroy(), 2000);
+    const title = 'Message #' + this.counter;
+    ref.setInput('label', title);
+
+    const confirmed$ = outputToObservable(ref.instance.confirmed)
+      .pipe(map(title => ({ trigger: 'confirmed', title })));
+
+    const timer$ = timer(5000)
+      .pipe(map(() => ({ trigger: 'timeout', title })));
+
+    race(confirmed$, timer$).subscribe(action => {
+      ref?.destroy();
+      console.log('action', action);
+    });
+
   }
 
 }

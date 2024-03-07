@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { TabbedPaneComponent } from "./tabbed-pane.component";
+import { TabActivatedEvent, TabbedPaneComponent } from "./tabbed-pane.component";
 import { TabComponent } from "./tab.component";
 
 @Component({
@@ -10,7 +10,7 @@ import { TabComponent } from "./tab.component";
 
     <div class="pane-container">
 
-      <app-tabbed-pane [(current)]="current">
+      <app-tabbed-pane [(current)]="current" (tabChanged)="tabChanged($event)">
         <app-tab title="1st tab">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur aliquam at quam facilis ducimus maxime
           suscipit numquam quidem quis autem? Dicta consequuntur a, laudantium iusto unde praesentium inventore fugit
@@ -46,4 +46,8 @@ import { TabComponent } from "./tab.component";
 })
 export class TabbedPaneDemoComponent {
   current = signal(0);
+
+  tabChanged(event: TabActivatedEvent) {
+    console.log('tab changed', event);
+  }
 }
