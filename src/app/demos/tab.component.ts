@@ -1,4 +1,4 @@
-import { Component, input, inject, computed, output, effect } from '@angular/core';
+import { Component, input, inject, computed } from '@angular/core';
 import { TabbedPaneComponent } from './tabbed-pane.component';
 
 @Component({

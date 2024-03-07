@@ -1,7 +1,5 @@
 import { Component, computed, contentChildren, model, output } from '@angular/core';
 import { TabComponent } from './tab.component';
-import { outputFromObservable, toObservable } from '@angular/core/rxjs-interop';
-import { reduce, scan } from 'rxjs';
 
 export type TabActivatedEvent = {
   active: number;
@@ -42,24 +40,11 @@ export class TabbedPaneComponent {
   tabs = contentChildren(TabComponent);
   currentTab = computed(() => this.tabs()[this.current()]);
 
-  tabActivated$ = toObservable(this.current).pipe(
-    scan(
-      (acc, active) => ({ active, previous: acc.active }),
-      { active: -1, previous: -1 }
-    )
-  );
-
-  tabActivated = outputFromObservable(this.tabActivated$);
+  tabActivated = output<TabActivatedEvent>();
 
   activate(active: number): void {
+    const previous = this.current();
     this.current.set(active);
+    this.tabActivated.emit({ previous, active });
   }
-
-  // tabActivated = output<TabActivatedEvent>();
-
-  // activate(active: number): void {
-  //   const previous = this.current();
-  //   this.current.set(active);
-  //   this.tabActivated.emit({ previous, active });
-  // }
 }
